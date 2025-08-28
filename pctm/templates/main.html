@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
+</head>
+<script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);}</script>
+<body>
+<button onclick="tgth()">Switch theme</button>
+<div class="main">
+    <p class="mt">Political Compass Test</p>
+    <div class="bts">
+        <button onclick="window.location.href = '/question'">Start</button>
+    </div>
+    <p>Pass this political compass test and find out your political views!</p>
+</div>
+<script src="{% static 'script.js' %}?v=1.1"></script>
+</body>
+</html>
+<!--a href="{% url 'question' %}"-->
