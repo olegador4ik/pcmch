@@ -27,6 +27,11 @@
   --mnbg-color: #313131;
 }
 
+.txc {
+    fill: var(--text-color);
+    stroke: var(--text-color);
+}
+
 .main {
     margin: auto;
     background-color: var(--mnbg-color);
