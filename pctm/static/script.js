@@ -33,3 +33,14 @@ function tgth() {
   }
 }
 
+function lng(a) {
+  switch(a) {
+    case 'rus':
+      console.log('привет, мир!');
+      break
+    case 'eng':
+      console.log('hi, world!');
+      break
+  }
+}
+

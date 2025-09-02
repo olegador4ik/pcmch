@@ -32,6 +32,11 @@
     stroke: var(--text-color);
 }
 
+img {
+    width: 10px;
+    height: 10px;
+}
+
 .main {
     margin: auto;
     background-color: var(--mnbg-color);

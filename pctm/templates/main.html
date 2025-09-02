@@ -6,17 +6,39 @@
 <meta name="de136bf439efd2f34682ecfde4e5501f4ecd27c8" content="de136bf439efd2f34682ecfde4e5501f4ecd27c8" />
 <link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
 </head>
-<script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);}</script>
+<script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);};
+const l = sessionStorage.getItem('l');</script>
+{{ lgs|json_script:"lgs-data" }}
 <body>
-<button onclick="tgth()">Switch theme</button>
+<button onclick="tgth()" id="t"></button>
+<button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
+<button onclick="tlg('eng')"><img src="{% static 'images/bf.png' %}?v=1.1"></button>
 <div class="main">
-    <p class="mt">Political Compass Test</p>
+    <p class="mt" id="m"></p>
     <div class="bts">
-        <button onclick="window.location.href = '/question'">Start</button>
+        <button id="s" onclick="window.location.href = '/question'"></button>
     </div>
-    <p>Pass this political compass test and find out your political views!</p>
+    <p id="a"></p>
 </div>
 <script src="{% static 'script.js' %}?v=1.1"></script>
+<script> 
+const lgs = JSON.parse(
+    document.getElementById('lgs-data').textContent
+  );
+let ids = Array.from(document.querySelectorAll('*[id]'), el => el.id);
+ids.splice(0, 1);
+function tlg(a) { 
+    for (let b of ids) {
+        document.getElementById(b).textContent = lgs[a][b]
+    } 
+    sessionStorage.setItem("l", a);
+}
+if (l) {
+    tlg(l)
+} else {
+    tlg('eng')
+};
+</script>
 <script>
 (function(gun){
 var d = document,
