@@ -9,7 +9,7 @@
 <script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);};
 const l = sessionStorage.getItem('l');</script>
 {{ lgs|json_script:"lgs-data" }}
-<script>console.log("{{ im }}")</script>
+{{ im|json.script:"mo" }}
 <body>
 <button onclick="tgth()" id="t"></button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
@@ -27,7 +27,7 @@ const lgs = JSON.parse(
     document.getElementById('lgs-data').textContent
   );
 let ids = Array.from(document.querySelectorAll('*[id]'), el => el.id);
-ids.splice(0, 1);
+ids.splice(0, 2);
 function tlg(a) { 
     for (let b of ids) {
         document.getElementById(b).textContent = lgs[a][b]
@@ -39,6 +39,7 @@ if (l) {
 } else {
     tlg('eng')
 };
+document.getElementById("t").textContent = 
 </script>
 <script>
 (function(gun){
