@@ -9,6 +9,7 @@
 let o = sessionStorage.getItem('l');
 </script>
 {{ lgs|json_script:"lgs-data" }}
+<script>console.log("{{ im }}")</script>
 <body>
 <button onclick="tgth()" id="t">Switch theme</button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
