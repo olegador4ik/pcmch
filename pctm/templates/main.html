@@ -9,7 +9,7 @@
 <script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);};
 const l = sessionStorage.getItem('l');</script>
 {{ lgs|json_script:"lgs-data" }}
-{{ im|json.script:"mo" }}
+{{ im|json_script:"mo" }}
 <body>
 <button onclick="tgth()" id="t"></button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
@@ -39,7 +39,7 @@ if (l) {
 } else {
     tlg('eng')
 };
-document.getElementById("t").textContent = 
+document.getElementById("t").textContent = document.getElementById('mo').textContent
 </script>
 <script>
 (function(gun){

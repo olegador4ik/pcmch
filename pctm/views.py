@@ -43,9 +43,9 @@ def question(request):
     qs = Q.objects.all().values('id', 'n', 'rus', 'eng')
     qs_json = json.dumps(list(qs), cls=DjangoJSONEncoder)
     if "mobile" in ua:
-        is_mobile = True
+        is_mobile = "True"
     else:
-        is_mobile = False
+        is_mobile = "False"
     context = {
         'qs_json': qs_json,
         'lgs': lgs,
