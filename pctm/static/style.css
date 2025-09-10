@@ -1,22 +1,18 @@
-.pcm {
-    display: block;
-    margin-bottom: 15px;
-    width: 500px;
-    height: 500px;
-}
-
-.pcm2 {
-    margin-top: 10px;
-    height: 10px;
-    width: 100%;
-}
-
 :root {
   --bg-color: rgb(184, 184, 184);
   --text-color: #202020;
   --hbg-color: rgb(209, 208, 208);
   --htxt-color: rgb(33, 33, 33);
   --mnbg-color: #a4a4a4;
+  --w-but: auto;
+  --h-but: 50px;
+  --fs-but: auto;
+  --img-size: 10px;
+  --m-l: 0;
+  --m-t: 0;
+  --ma-wi: 500px;
+  --fs-to: larger;
+  --pcm-wi: 500px;
 }
 
 [data-theme="dark"] {
@@ -27,14 +23,39 @@
   --mnbg-color: #313131;
 }
 
+[data-mob="mobile"] {
+    --w-but: 75%;
+    --h-but: 100px;
+    --m-l: 10px;
+    --fs-but: clamp(20px, 4vw, 40px);
+    --img-size: 80px;
+    --m-t: 20px;
+    --ma-wi: 90%;
+    --fs-to: clamp(20px, 4vw, 40px);
+    --pcm-wi: 860px;
+}
+
+.pcm {
+    display: block;
+    margin-bottom: 15px;
+    width: var(--pcm-wi);
+    height: var(--pcm-wi);
+}
+
+.pcm2 {
+    margin-top: 10px;
+    height: 10px;
+    width: 100%;
+}
+
 .txc {
     fill: var(--text-color);
     stroke: var(--text-color);
 }
 
 img {
-    width: 10px;
-    height: 10px;
+    width: var(--img-size);
+    height: var(--img-size);
 }
 
 .main {
@@ -42,15 +63,17 @@ img {
     background-color: var(--mnbg-color);
     border-radius: 10px;
     padding: 10px;
-    width: 500px;
+    width: var(--ma-wi);
     text-align: center;
+    margin-top: var(--m-t);
 }
 
 .mt {
-    font-size: larger;
+    font-size: var(--fs-to);
+    height: var(--h-but);
     margin: 5px;
-    height: 50px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .bts {
@@ -66,6 +89,7 @@ img {
     border-radius:3px; 
     padding: 5px; 
     text-align: center;
+    font-size: var(--fs-to);
     margin-top: 10px;
 }
 
@@ -76,7 +100,9 @@ body {
 }
 
 button {
-    height: 30px;
+    height: var(--h-but);
+    font-size: var(--fs-but);
+    margin-left: var(--m-l);
     flex: 1;
     background: transparent;
     color: var(--text-color);
@@ -92,4 +118,3 @@ button:hover {
     border-color: var(--hbg-color);
     color: var(--htxt-color);
 }
-

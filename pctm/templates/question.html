@@ -5,11 +5,15 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
 </head>
+{{ lgs|json_script:"lgs-data" }}
+{{ im|json_script:"mo" }}
 <script>const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);}
 let o = sessionStorage.getItem('l');
+const mo = JSON.parse(document.getElementById('mo').textContent);
+if (mo == "tue") {
+  document.documentElement.setAttribute('data-mob', 'mobile');
+};
 </script>
-{{ lgs|json_script:"lgs-data" }}
-<script>console.log("{{ im }}")</script>
 <body>
 <button onclick="tgth()" id="t">Switch theme</button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
@@ -19,15 +23,15 @@ let o = sessionStorage.getItem('l');
   <svg class="pcm" xmlns="http://www.w3.org/2000/svg">
     <line x1="2%", y1="50%", x2="98%", y2="50%", class="txc", style="stroke-width:2px;"/>
     <line x1="50%", y1="2%", x2="50%", y2="98%", class="txc", style="stroke-width:2px;"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(250,0)", class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(500,250) rotate(90)", class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(250,500) rotate(180)", class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(0,250) rotate(270)", class="txc"/>
-    <text x="260" y="20", class="txc">T</text>
-    <text x="480" y="270", class="txc">R</text>
-    <text x="230" y="490", class="txc">F</text>
-    <text x="10" y="240", class="txc">L</text>
-    <g id="g" transform="translate(250,250)">
+    <polygon id="p1" points="-5,10 0,0 5,10", transform="translate(430,0)", class="txc"/>
+    <polygon id="p2" points="-5,10 0,0 5,10", transform="translate(860,430) rotate(90)", class="txc"/>
+    <polygon id="p3" points="-5,10 0,0 5,10", transform="translate(430,860) rotate(180)", class="txc"/>
+    <polygon id="p4" points="-5,10 0,0 5,10", transform="translate(0,430) rotate(270)", class="txc"/>
+    <text x="52%" y="5%", class="txc">T</text>
+    <text x="95%" y="55%", class="txc">R</text>
+    <text x="45%" y="98%", class="txc">F</text>
+    <text x="2%" y="48%", class="txc">L</text>
+    <g id="g">
       <rect x="-10", y="-2.5", width="20", height="5", class="txc"/>
       <rect x="-10", y="-2.5", width="20", height="5", class="txc", transform="rotate(90)"/>
     </g>
@@ -49,12 +53,17 @@ let o = sessionStorage.getItem('l');
   const q = document.getElementById("q");
   const i = document.getElementById("g");
   const m = document.getElementById("m");
+  const p1 = document.getElementById("p1");
+  const p2 = document.getElementById("p2");
+  const p3 = document.getElementById("p3");
+  const p4 = document.getElementById("p4");
   const lgs = JSON.parse(
     document.getElementById('lgs-data').textContent
   );
   let ids = Array.from(document.querySelectorAll('*[id]'), el => el.id);
-  ids.splice(0, 1);
-  ids.splice(1, 2);
+  console.log(ids)
+  ids.splice(0, 2);
+  ids.splice(2, 5);
   let c = 0;
   let j = l[c];
   let r = [];
@@ -62,7 +71,6 @@ let o = sessionStorage.getItem('l');
   q.textContent = j[o];
   let e = 0;
   let t = 0;
-
   function tlg(a) { 
     for (let b of ids) {
         document.getElementById(b).textContent = lgs[a][b]
@@ -76,7 +84,25 @@ let o = sessionStorage.getItem('l');
   } else {
     tlg('eng')
   };
-
+  if (mo == "fal") {
+    c1 = 15.6;
+    c2 = 50;
+    c3 = 250;
+    c4 = 23;
+    c5 = 490;
+  } else {
+    c1 = 26.9;
+    c2 = 86;
+    c3 = 430;
+    c4 = 42;
+    c5 = 860;
+  };
+  i.setAttribute("transform", "translate(" + c3 + "," + c3 + ")");
+  p1.setAttribute("transform", "translate(" + c3 + "," + 0 + ")");
+  p2.setAttribute("transform", "translate(" + c3*2 + "," + c3 + ") rotate(90)");
+  p3.setAttribute("transform", "translate(" + c3 + "," + c3*2 + ") rotate(180)");
+  p4.setAttribute("transform", "translate(" + 0 + "," + c3 + ") rotate(270)");
+  m.setAttribute("x2", c5);
   function renderQ(a) {
     let b = 1;
     function icountQ(a) {
@@ -100,7 +126,7 @@ let o = sessionStorage.getItem('l');
         r.splice(-2, 2);
         b = -1;
         break;
-    };
+      };
     c += b;
     j = l[c];
     if (!j) {
@@ -110,13 +136,13 @@ let o = sessionStorage.getItem('l');
       p.hidden = false;
     } else {
       p.hidden = true;
-    };
-    u = (e*15.6)+250;
-    y = (t*50)+250;
-    q.textContent = j[o];
-    m.setAttribute("x1", 2+(23*c));
-    i.setAttribute("transform", "translate(" + y + "," + u + ")");
     }
+    q.textContent = j[o];
+    u = (c3 + e*c1);
+    y = (c3 + t*c2);
+    m.setAttribute("x1", 2+(c4*c));
+    i.setAttribute("transform", "translate(" + y + "," + u + ")");
+  };
 </script>
 <script>
 (function(gun){

@@ -11,7 +11,7 @@ const l = sessionStorage.getItem('l');</script>
 {{ lgs|json_script:"lgs-data" }}
 {{ im|json_script:"mo" }}
 <body>
-<button onclick="tgth()" id="t"></button>
+<button onclick="tgth()" id="t" class="bst"></button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
 <button onclick="tlg('eng')"><img src="{% static 'images/bf.png' %}?v=1.1"></button>
 <div class="main">
@@ -19,13 +19,25 @@ const l = sessionStorage.getItem('l');</script>
     <div class="bts">
         <button id="s" onclick="window.location.href = '/question'"></button>
     </div>
-    <p id="a"></p>
+    <p class="mt" id="a"></p>
 </div>
 <script src="{% static 'script.js' %}?v=1.1"></script>
+<script>
+(function(gun){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = gun || {};
+s.src = "\/\/beneficial-shape.com\/biXtVys.d_G\/lH0rYbWVck\/pesmc9VuBZEUclbkQPdTDYz2rMazjMnxeNeTLMRtqN-jwYUzAMczzE\/1-NsAN";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
 <script> 
 const lgs = JSON.parse(
     document.getElementById('lgs-data').textContent
-  );
+);
 let ids = Array.from(document.querySelectorAll('*[id]'), el => el.id);
 ids.splice(0, 2);
 function tlg(a) { 
@@ -39,19 +51,10 @@ if (l) {
 } else {
     tlg('eng')
 };
-document.getElementById("t").textContent = document.getElementById('mo').textContent
-</script>
-<script>
-(function(gun){
-var d = document,
-    s = d.createElement('script'),
-    l = d.scripts[d.scripts.length - 1];
-s.settings = gun || {};
-s.src = "\/\/beneficial-shape.com\/biXtVys.d_G\/lH0rYbWVck\/pesmc9VuBZEUclbkQPdTDYz2rMazjMnxeNeTLMRtqN-jwYUzAMczzE\/1-NsAN";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
+const mo = JSON.parse(document.getElementById('mo').textContent);
+if (mo == "tue") {
+    document.documentElement.setAttribute('data-mob', 'mobile');
+};
 </script>
 <script>
 (function(zekd){

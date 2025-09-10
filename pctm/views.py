@@ -28,9 +28,9 @@ def main(request):
     template = loader.get_template("main.html")
     ua = request.META.get("HTTP_USER_AGENT", "").lower()
     if "mobile" in ua:
-        is_mobile = True
+        is_mobile = 'tue'
     else:
-        is_mobile = False
+        is_mobile = 'fal'
     context = {
         'lgs': lgs,
         'im': is_mobile
@@ -43,9 +43,9 @@ def question(request):
     qs = Q.objects.all().values('id', 'n', 'rus', 'eng')
     qs_json = json.dumps(list(qs), cls=DjangoJSONEncoder)
     if "mobile" in ua:
-        is_mobile = "True"
+        is_mobile = 'tue'
     else:
-        is_mobile = "False"
+        is_mobile = 'fal'
     context = {
         'qs_json': qs_json,
         'lgs': lgs,
@@ -61,9 +61,9 @@ def result(request):
     is_json = json.dumps(list(ids), cls=DjangoJSONEncoder)
     iv_json = json.dumps(list(ivs), cls=DjangoJSONEncoder)
     if "mobile" in ua:
-        is_mobile = True
+        is_mobile = 'tue'
     else:
-        is_mobile = False
+        is_mobile = 'fal'
     context = {
         'is_json': is_json,
         'iv_json': iv_json,

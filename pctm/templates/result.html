@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="{% static 'style.css' %}?v=1.1">
 </head>
+{{ lgs|json_script:"lgs-data" }}
+{{ im|json_script:"mo" }}
 <script>
 const savedTheme = sessionStorage.getItem('theme');if(savedTheme){document.documentElement.setAttribute('data-theme', savedTheme);}
 const l = sessionStorage.getItem('l');
+const mo = JSON.parse(document.getElementById('mo').textContent);
+if (mo == "tue") {
+  document.documentElement.setAttribute('data-mob', 'mobile');
+};
 </script>
-{{ lgs|json_script:"lgs-data" }}
-<script>console.log("{{ im }}")</script>
 <body>
 <button onclick="tgth()" id="t">Switch theme</button>
 <button onclick="tlg('rus')"><img src="{% static 'images/rf.png' %}?v=1.1"></button>
@@ -19,23 +23,23 @@ const l = sessionStorage.getItem('l');
   <svg class="pcm" xmlns="http://www.w3.org/2000/svg">
     <line x1="0", y1="50%", x2="100%", y2="50%", class="txc", style="stroke-width:2px;"/>
     <line x1="50%", y1="0", x2="50%", y2="100%", class="txc", style="stroke-width:2px;"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(250,0)" class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(500,250) rotate(90)" class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(250,500) rotate(180)" class="txc"/>
-    <polygon points="-5,10 0,0 5,10", transform="translate(0,250) rotate(270)" class="txc"/>
-    <text x="260" y="20" class="txc">T</text>
-    <text x="480" y="270" class="txc">R</text>
-    <text x="230" y="490" class="txc">F</text>
-    <text x="10" y="240" class="txc">L</text>
+    <polygon id="p1" points="-5,10 0,0 5,10", transform="translate(250,0)" class="txc"/>
+    <polygon id="p2" points="-5,10 0,0 5,10", transform="translate(500,250) rotate(90)" class="txc"/>
+    <polygon id="p3" points="-5,10 0,0 5,10", transform="translate(250,500) rotate(180)" class="txc"/>
+    <polygon id="p4" points="-5,10 0,0 5,10", transform="translate(0,250) rotate(270)" class="txc"/>
+    <text x="52%" y="5%" class="txc">T</text>
+    <text x="95%" y="55%" class="txc">R</text>
+    <text x="45%" y="98%" class="txc">F</text>
+    <text x="2%" y="48%" class="txc">L</text>
     <g id="g" transform="translate(250,250)">
       <rect x="-10", y="-2.5", width="20", height="5", class="txc"/>
       <rect x="-10", y="-2.5", width="20", height="5", class="txc", transform="rotate(90)"/>
     </g>
   </svg>
-  <p id="i">Ideology that maybe can fit to you</p>
+  <p class="mt" id="i">Ideology that maybe can fit to you</p>
   <span id="e" class="ido"></span>
-  <p id="x">Axis "TF"(Totalitarism and Freedom) represents your views of freedom and goverment's power</p>
-  <p id="y">Axis "LR"(Left and Right) represents your views of social hierachy</p>
+  <p class="mt" id="x">Axis "TF"(Totalitarism and Freedom) represents your views of freedom and goverment's power</p>
+  <p class="mt" id="y">Axis "LR"(Left and Right) represents your views of social hierachy</p>
 </div>
 <script src="{% static 'script.js' %}?v=1.1"></script>
 <script>
@@ -43,6 +47,10 @@ const l = sessionStorage.getItem('l');
   const v = JSON.parse('{{ iv_json|escapejs }}');
   const s = document.getElementById("e");
   const i = document.getElementById("g");
+  const p1 = document.getElementById("p1");
+  const p2 = document.getElementById("p2");
+  const p3 = document.getElementById("p3");
+  const p4 = document.getElementById("p4");
   const lgs = JSON.parse(
     document.getElementById('lgs-data').textContent
   );
@@ -56,20 +64,34 @@ const l = sessionStorage.getItem('l');
     t = 0;
     e = 0;
   };
-  u = (-e*15.625)+250;
-  y = (t*50)+250;
+  if (mo == "fal") {
+    c1 = 15.6;
+    c2 = 50;
+    c3 = 250;
+  } else {
+    c1 = 26.9;
+    c2 = 86;
+    c3 = 430;
+  };
+  i.setAttribute("transform", "translate(" + c3 + "," + c3 + ")");
+  p1.setAttribute("transform", "translate(" + c3 + "," + 0 + ")");
+  p2.setAttribute("transform", "translate(" + c3*2 + "," + c3 + ") rotate(90)");
+  p3.setAttribute("transform", "translate(" + c3 + "," + c3*2 + ") rotate(180)");
+  p4.setAttribute("transform", "translate(" + 0 + "," + c3 + ") rotate(270)");
+  u = (-e*c1)+c3;
+  y = (t*c2)+c3;
   for (let a of c) {
     if (a.x <= t && t <= (a.x+a.w) && a.y <= e && e <= (a.y+a.h)) {
       p = a.id
-      console.log(p)
       s.textContent = v[p-1][l];
       s.style.color = '#' + a.c;
       s.style.borderColor = '#' + a.c;
     };
   };
   let ids = Array.from(document.querySelectorAll('*[id]'), el => el.id);
-  ids.splice(0, 1);
-  ids.splice(2, 1);
+  console.log(ids)
+  ids.splice(0, 2);
+  ids.splice(2, 5);
   function tlg(a) { 
     for (let b of ids) {
         document.getElementById(b).textContent = lgs[a][b]
